@@ -10,7 +10,7 @@ The following functions are implemented:
 ### Installation
 
 ``` r
-devtools::install_git("https://gitlab.com/hrbrmstr/satcat.git")
+devtools::install_git("https://github.com/hrbrmstr/satcat.git")
 ```
 
 ``` r
@@ -50,8 +50,8 @@ glimpse(satcat_df)
     ## $ decay_date            <date> 1957-12-01, 1958-01-03, 1958-04-14, 1970-03-31, NA, 1958-06-28, 1958-12-03, 1960-04-...
     ## $ orbital_period        <dbl> 96.2, 96.1, 103.7, 88.5, 132.8, 103.6, 102.7, 88.4, 92.8, 98.2, 121.5, 125.9, 92.7, 9...
     ## $ inclination           <dbl> 65.1, 65.0, 65.3, 33.2, 34.2, 33.5, 65.1, 65.1, 50.3, 32.3, 32.9, 32.9, 90.0, 89.9, 4...
-    ## $ apogee                <dbl> 938, 945, 1659, 215, 3833, 1739, 1571, 255, 585, 1187, 2940, 3329, 697, 346, 42276, 4...
-    ## $ perigee               <dbl> 214, 227, 211, 183, 652, 117, 206, 139, 239, 159, 553, 554, 114, 239, 251, 651, 198, ...
+    ## $ apogee                <dbl> 938, 945, 1659, 215, 3832, 1739, 1571, 255, 585, 1187, 2940, 3329, 697, 346, 42276, 4...
+    ## $ perigee               <dbl> 214, 227, 211, 183, 652, 117, 206, 139, 239, 159, 554, 554, 114, 239, 251, 651, 198, ...
     ## $ radar_cross_section   <dbl> 20.4200, NA, 0.0800, NA, 0.1204, NA, NA, 11.8400, NA, NA, 0.3910, 0.5281, NA, NA, NA,...
     ## $ orbital_status_code   <chr> "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "...
     ## $ source_full_name      <chr> "Commonwealth of Independent States (former USSR)", "Commonwealth of Independent Stat...
@@ -238,7 +238,7 @@ library(testthat)
 date()
 ```
 
-    ## [1] "Fri Jan 13 23:07:41 2017"
+    ## [1] "Sat Jan 14 14:42:05 2017"
 
 ``` r
 test_dir("tests/")
@@ -248,3 +248,4 @@ test_dir("tests/")
     ## OK: 1 SKIPPED: 0 FAILED: 0
     ## 
     ## DONE ===================================================================================================================
+    ## Way to go!

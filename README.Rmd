@@ -13,7 +13,7 @@ The following functions are implemented:
 ### Installation
 
 ```{r eval=FALSE}
-devtools::install_git("https://gitlab.com/hrbrmstr/satcat.git")
+devtools::install_git("https://github.com/hrbrmstr/satcat.git")
 ```
 
 ```{r message=FALSE, warning=FALSE, error=FALSE}
