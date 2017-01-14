@@ -37,7 +37,7 @@ glimpse(satcat_df)
 dplyr::filter(satcat_df, is_active, perigee!=0) -> df
 ```
 
-```{r fig.width=9, fig.height=3.5}
+```{r fig.width=9, fig.height=3.5, fig.retina=2}
 ggplot() +
   geom_segment(data=df, 
                aes(x=designator, xend=designator, y=apogee, yend=perigee),
