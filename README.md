@@ -81,7 +81,7 @@ ggplot() +
   theme(axis.ticks.x=element_blank())
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
+<img src="README_files/figure-markdown_github/unnamed-chunk-4-1.png" width="864" />
 
 ``` r
 # How many satellites launched per source (country) [top 20]
@@ -238,7 +238,7 @@ library(testthat)
 date()
 ```
 
-    ## [1] "Fri Jan 13 23:05:00 2017"
+    ## [1] "Fri Jan 13 23:07:41 2017"
 
 ``` r
 test_dir("tests/")
