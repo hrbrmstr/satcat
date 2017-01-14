@@ -3,6 +3,8 @@
 
 T.S. Kelso has been transcribing NORAD's "resident space object" data for decades. One component of of this is the 'SATCAT' satellite catalog (<https://celestrak.com/satcat/search.asp>), which provides data on all known satellites launched since 1957.
 
+Data source pkg inspired by mention on [Data Is Plural](http://tinyletter.com/data-is-plural/letters/data-is-plural-2017-01-11-edition).
+
 The following functions are implemented:
 
 -   `read_satcat`: Read in a complete SATCAT database complete with expanded status code, site code and launch source codes.
@@ -238,7 +240,7 @@ library(testthat)
 date()
 ```
 
-    ## [1] "Sat Jan 14 14:42:05 2017"
+    ## [1] "Sat Jan 14 14:45:54 2017"
 
 ``` r
 test_dir("tests/")
@@ -248,4 +250,3 @@ test_dir("tests/")
     ## OK: 1 SKIPPED: 0 FAILED: 0
     ## 
     ## DONE ===================================================================================================================
-    ## Way to go!
