@@ -1,0 +1,102 @@
+---
+output: rmarkdown::github_document
+---
+
+`satcat` : Tools to Work with the 'CelesTrak' Satellite Catalog API
+
+T.S. Kelso has been  transcribing NORAD's "resident space object" data for decades. One component of of this is the 'SATCAT' satellite catalog (<https://celestrak.com/satcat/search.asp>), which provides data on all known satellites launched since 1957.
+
+The following functions are implemented:
+
+- `read_satcat`:	Read in a complete SATCAT database complete with expanded status code, site code and launch source codes.
+
+### Installation
+
+```{r eval=FALSE}
+devtools::install_git("https://gitlab.com/hrbrmstr/satcat.git")
+```
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+options(width=120)
+```
+
+### Usage
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+library(satcat)
+library(dplyr)
+library(ggplot2)
+
+# current verison
+packageVersion("satcat")
+
+satcat_df <- read_satcat()
+
+glimpse(satcat_df)
+
+dplyr::filter(satcat_df, is_active, perigee!=0) -> df
+```
+
+```{r fig.width=9, fig.height=3.5}
+ggplot() +
+  geom_segment(data=df, 
+               aes(x=designator, xend=designator, y=apogee, yend=perigee),
+               size=0.5, alpha=5/6, position=position_jitter()) +
+  geom_hline(yintercept=c(100, 360000), linetype='dotted') +
+  geom_text(data=data_frame(), 
+            aes(x=c(10, 10), y=c(110, 400000), 
+                label=c("Kármán line", "Lower lunar perigee")),
+            vjust=0, hjust=0) +
+  scale_y_continuous(name="Perigee:Apogee span (km, orbit) — log scale", label=scales::comma,
+                     expand=c(0,0), limits=c(100,600000), trans="log10") +
+  labs(x=NULL, title="SATCAT Orbit Ranges of Active Satellites") +
+  hrbrmisc::theme_hrbrmstr_msc(grid="") +
+  theme(axis.text.x=element_blank()) +
+  theme(axis.ticks.x=element_blank())
+```
+
+```{r message=FALSE}
+# How many satellites launched per source (country) [top 20]
+
+count(satcat_df, source_full_name, sort=TRUE) %>%
+  mutate(ct=scales::comma(n), pct=scales::percent(n/sum(n))) %>%
+  select(-n) %>%
+  print(n=20)
+
+# How many satellites launched per source (country) that are still active? [top 20]
+
+filter(satcat_df, is_active) %>%
+  count(source_full_name, sort=TRUE) %>%
+  mutate(ct=scales::comma(n), pct=scales::percent(n/sum(n))) %>%
+  select(-n) %>%
+  print(n=20)
+
+# What's the most popular launch site? [top 20]
+
+count(satcat_df, launch_site_full_name, sort=TRUE) %>%
+  mutate(ct=scales::comma(n), pct=scales::percent(n/sum(n))) %>%
+  select(-n) %>%
+  mutate(launch_site_full_name=abbreviate(launch_site_full_name, 80)) %>%
+  print(n=20)
+
+# What's the most popular launch site this century? [top 20]
+
+filter(satcat_df, lubridate::year(launch_date) >= 2000) %>%
+  count(launch_site_full_name, sort=TRUE) %>%
+  mutate(ct=scales::comma(n), pct=scales::percent(n/sum(n))) %>%
+  select(-n) %>%
+  mutate(launch_site_full_name=abbreviate(launch_site_full_name, 80)) %>%
+  print(n=20)
+```
+
+### Test Results
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+library(satcat)
+library(testthat)
+
+date()
+
+test_dir("tests/")
+```
+
